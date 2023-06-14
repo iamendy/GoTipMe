@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.stroke {
+  color: rgba(0, 221, 156, 0.03);
+  text-shadow: -1px -1px 0 #1f4439, 1px -1px 0 #1f4439, -1px 1px 0 #1f4439,
+    1px 1px 0 #1f4439;
+}
+
+.left-how {
+  @apply text-black rounded-l-3xl pl-4 py-5 ml-5 xl:py-8 xl:px-5 xl:w-[85%] xl:ml-auto xl:text-xl xl:py-10 xl:pl-16;
+  background: rgba(0, 221, 156, 0.2);
+}
+
+.right-how {
+  @apply text-black rounded-r-3xl pr-4 py-5 mr-5 xl:py-8 xl:px-5 xl:w-[85%]  xl:text-xl xl:py-10 xl:pr-16;
+  background: rgba(0, 221, 156, 0.2);
+}
