@@ -1,7 +1,7 @@
 export const Footer = () => {
   return (
     <footer className="mt-10 text-white/50 text-sm text-center">
-      AngelHack Hackathon
+      AngelHack Challenge
     </footer>
   );
 };

@@ -14,19 +14,29 @@ function Page() {
         </div>
 
         <section className="bg-black text-white pt-16 pb-5">
-          <div className="xl:max-w-7xl xl:mx-auto">
+          <div className="w-[90%] mx-auto xl:max-w-7xl xl:mx-auto text-center">
             <h1 className="mb-10 text-center font-extrabold text-2xl xl:text-4xl text-green-400">
               Welcome to GoTipMe
             </h1>
-            <p className=" px-3 text-lg leading-loose xl:max-w-[70%] xl:mx-auto">
-              The decentralized tipping platform for creators, artists, and
-              entrepreneurs. Say goodbye to centralized tipping platforms that
-              charge high fees and put unnecessary restrictions on your
-              earnings. With TipX, you can receive tips from your audience
-              directly and securely, using the power of blockchain technology.
-              Join the decentralized tipping revolution and start earning what
-              you deserve.
-            </p>
+
+            <div className=" px-3 text-lg leading-loose xl:max-w-[60%] xl:mx-auto space-y-5">
+              <p>
+                The decentralized tipping platform for creators, artists, and
+                entrepreneurs.
+              </p>
+
+              <p>
+                Say goodbye to centralized tipping platforms that charge high
+                fees and put unnecessary restrictions on your earnings.
+              </p>
+
+              <p>
+                With GoTipMe, you can receive tips from your audience directly
+                and securely, using the power of blockchain technology. Join the
+                decentralized tipping revolution and start earning what you
+                deserve.
+              </p>
+            </div>
           </div>
         </section>
 

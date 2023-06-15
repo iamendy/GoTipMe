@@ -8,6 +8,7 @@ import { useState } from "react";
 const Tip = ({ tip }) => {
   const [totalAmount, setTotalAmount] = useState(0);
   const { address } = useAccount();
+
   const { isLoading } = useContractRead({
     address: config.address,
     abi: config.abi,
@@ -26,20 +27,29 @@ const Tip = ({ tip }) => {
       key={tip.id}
       className={`${
         tip?.isActive ? "" : "border-red-300 border-2"
-      } bg-gray-700 mt-5 p-5 rounded-lg font-bold relative`}
+      } bg-gray-700 mt-5 p-5 lg:px-9 rounded-lg font-bold relative`}
     >
-      <span className="absolute top-4 right-4 bg-green-700 text-xs p-2 rounded-full shadow-sm">
-        {tip && ethers.utils.formatEther(tip?.maxAmount)} ETH
-      </span>
+      <div className="flex items-center justify-between">
+        <div className="mb-4">
+          <h4 className="text-green-500">Title</h4>
+          <p className="">{tip?.title}</p>
+        </div>
 
-      <span className="absolute top-4 right-20 bg-green-700 text-xs p-2 rounded-full shadow-sm">
-        {totalAmount} ETH
-      </span>
+        <div className="flex flex-col text-xs lg:text-sm">
+          <span className="px-2 rounded-full shadow-sm">
+            Max: {tip && ethers.utils.formatEther(tip?.maxAmount)} ETH
+          </span>
 
-      <h4 className="text-green-500">Title</h4>
-      <p>{tip?.title}</p>
-      <h4 className="text-green-500">Description</h4>
-      <p>{tip?.description}</p>
+          <span className=" px-2 rounded-full shadow-sm">
+            Received: {totalAmount} ETH
+          </span>
+        </div>
+      </div>
+
+      <div className="mb-4">
+        <h4 className="text-green-500">Description</h4>
+        <p className="lg:w-[30%]">{tip?.description}</p>
+      </div>
 
       <div className="flex justify-between">
         <Link href={`/give-tip?add=${address}&tipId=${tip.id}`} target="_blank">
@@ -62,9 +72,9 @@ const Tip = ({ tip }) => {
           </div>
         </Link>
 
-        <Link href={`/give-tip?id=${tip?.id}/donors`}>
+        <Link href={`/dashboard/view-payments?add=${address}&id=${tip?.id}`}>
           <div className="flex items-center bg-green-600 rounded-lg w-fit mt-2 p-3">
-            See Donors
+            View Payments
           </div>
         </Link>
       </div>

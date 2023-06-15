@@ -13,6 +13,7 @@ const Dashboard = () => {
     abi: config.abi,
     args: [address],
     functionName: "getUserTips",
+    watch: true,
     onSuccess(d) {
       console.log(d);
     },
@@ -39,7 +40,10 @@ const Dashboard = () => {
         </div>
 
         {tips && tips.length > 0 ? (
-          tips.reverse().map((tip) => <Tip key={tip.name} tip={tip} />)
+          tips
+            .slice(0)
+            .reverse()
+            .map((tip) => <Tip key={tip.name} tip={tip} />)
         ) : (
           <div className="mt-5 bg-gray-700 mt-5= p-5 text-center rounded-lg font-bold">
             <div className=" flex flex-col justify-center items-center">

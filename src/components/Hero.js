@@ -3,10 +3,11 @@ import chain from "../../public/img/chain.png";
 import { useAccount } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 const Hero = () => {
   const { isConnected } = useAccount();
-
+  const { openConnectModal } = useConnectModal();
   return (
     <div
       className="mt-14 px-3 md:flex md:items-center md:mt-5 lg:max-w-5xl lg:mx-auto
@@ -17,19 +18,29 @@ const Hero = () => {
           redefining the future of tips
         </h3>
         <h1 className="font-extrabold text-3xl tracking-wider leading-relaxed xl:text-5xl xl:mb-9">
-          Giving tips with Blockchain technology.
+          Receive tips with Blockchain technology.
         </h1>
 
         {isConnected ? (
           <Link
             href="/dashboard"
-            className="bg-green-500 font-bold text-gray-900 px-7 py-3 rounded-sm mt-9 xl:px-9 xl:py-4 xl:text-3xl
+            className="bg-green-500 font-bold text-gray-900 px-7 py-3 rounded-sm mt-9 xl:px-9 xl:py-4 xl:text-xl
         hover:bg-green-700 active:bg-green-500"
           >
-            Proceed to Dashboard
+            Dashboard
           </Link>
         ) : (
-          <ConnectButton />
+          <>
+            {openConnectModal && (
+              <button
+                onClick={openConnectModal}
+                className="bg-green-500 font-bold text-gray-900 px-7 py-3 rounded-sm mt-2 xl:mt-0 xl:px-9 xl:py-4 xl:text-xl
+        hover:bg-green-700 active:bg-green-500 "
+              >
+                Connect Wallet
+              </button>
+            )}
+          </>
         )}
       </div>
 

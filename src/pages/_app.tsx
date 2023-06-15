@@ -13,7 +13,7 @@ function App({ Component, pageProps }: AppProps) {
   React.useEffect(() => setMounted(true), []);
   return (
     <WagmiConfig client={client}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider chains={chains} modalSize="compact">
         <NextHead>
           <title>GoTipMe | Decentralized tips</title>
         </NextHead>

@@ -80,16 +80,16 @@ const GiveTip = () => {
         )}
 
         {tip && tip.title ? (
-          <div className="bg-gray-700 p-5 xl:max-w-5xl xl:mx-auto mt-28 rounded-lg">
+          <div className="bg-gray-700 p-5 xl:p-12 xl:max-w-3xl xl:mx-auto mt-28 rounded-lg">
             <h3 className="font-bold text-5xl">{tip?.title}</h3>{" "}
-            <p className="mt-5 tex-xl">{tip?.description}</p>
+            <p className="mt-5 xl:text-lg xl:w-[60%]">{tip?.description}</p>
             <div className="mt-9 mb-3 flex items-center">
               <Image src={eth} alt="eth" className="w-6 h-6" />
               <span className="font-bold text-lg">
                 {tip && ethers?.utils?.formatEther(tip?.maxAmount)}
               </span>
             </div>
-            <div className="flex flex-col space-y-7">
+            <div className="flex flex-col space-y-7 xl:w-[60%]">
               <input
                 type="text"
                 placeholder="Enter Amount (ETH)"
@@ -98,7 +98,7 @@ const GiveTip = () => {
               />
 
               <button
-                className="px-5 py-3 bg-green-500 mx-auto text-white rounded-lg shadow-sm w-fit focus-within:outline-none disabled:bg-gray-500"
+                className="px-5 py-3 bg-green-500 text-white rounded-lg shadow-sm w-fit focus-within:outline-none disabled:bg-gray-500"
                 onClick={() => handleGift()}
                 disabled={isLoading}
               >
