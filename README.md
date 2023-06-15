@@ -8,6 +8,11 @@ The rise of social media, and most especially streaming services have given crea
 
 [GoTipMe](https://https://go-tip-me.vercel.app) allows just anyone with a blockchain wallet create a Tipping account. They can have more than one Tip running and receive tips from any of them simultaneously. With GoTipMe, a user can rise funds, and have full access to their funds and withdraw whenever they want without paying any commision.
 
+![homepage](https://go-tip-me.vercel.app/img/1.JPG) <br />  
+![create Tip](https://go-tip-me.vercel.app/img/2.JPG) <br />  
+![Give Tip](https://go-tip-me.vercel.app/img/4.JPG) <br />  
+![Shows Up](https://go-tip-me.vercel.app/img/3.JPG)
+
 ### 💻 How I built GoTipMe
 
 I created GoTipMe smart contract with Solidity using Truffle framework. I also wrote some tests using Chai to ensure proper checking. I also used OpenZepplin to implement counter.
