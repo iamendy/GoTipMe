@@ -24,7 +24,7 @@ const Hero = () => {
         {isConnected ? (
           <Link
             href="/dashboard"
-            className="bg-green-500 font-bold text-gray-900 px-7 py-3 rounded-sm mt-9 xl:px-9 xl:py-4 xl:text-xl
+            className="bg-green-500 font-bold text-gray-900 px-7 py-3 rounded-sm mt-2 inline-block xl:px-9 xl:py-4 xl:text-xl
         hover:bg-green-700 active:bg-green-500"
           >
             Dashboard

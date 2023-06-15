@@ -73,6 +73,8 @@ const ViewPayments = () => {
     toastId = toast.loading("processing..");
   };
 
+  tip && console.log(tip);
+
   return (
     <Layout>
       <section className="mt-9 xl:max-w-5xl xl:mx-auto">
@@ -111,7 +113,7 @@ const ViewPayments = () => {
               {payments?.length} donors!
             </h3>
 
-            {tip?.active ? (
+            {tip?.isActive ? (
               <button
                 className="bg-green-500 p-3 rounded-lg hover:bg-green-800 disabled:bg-gray-800"
                 onClick={handleWithdraw}

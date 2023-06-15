@@ -14,6 +14,7 @@ const Tip = ({ tip }) => {
     abi: config.abi,
     functionName: "getTipTotalAmount",
     args: [address, tip?.id],
+    watch: true,
     overrides: {
       from: address,
     },

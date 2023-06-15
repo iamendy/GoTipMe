@@ -6,7 +6,7 @@ import {
   usePrepareContractWrite,
   useContractWrite,
   useAccount,
-  useSigner,
+  useWaitForTransaction,
 } from "wagmi";
 import config from "../abi";
 import { ethers } from "ethers";
@@ -21,18 +21,20 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 const GiveTip = () => {
   let toastId;
   const { address, isConnected } = useAccount();
-  const [amount, setAmount] = useState("0");
+  const [amount, setAmount] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
   const { width, height } = useWindowSize();
   const router = useRouter();
 
-  const { data: tip, isLoading: isLoadingTip } = useContractRead({
+  const {
+    data: tip,
+    isLoading: isLoadingTip,
+    refetch,
+  } = useContractRead({
     address: config.address,
     abi: config.abi,
     functionName: "getTip",
     args: [router?.query?.add, router?.query?.tipId],
-    onSuccess(d) {
-      console.log(d);
-    },
   });
 
   const { config: conf } = usePrepareContractWrite({
@@ -41,32 +43,34 @@ const GiveTip = () => {
     functionName: "giveTip",
     overrides: {
       from: address,
-      value: amount,
+      value: ethers.utils.parseEther(amount || "0"),
     },
     args: [tip?.owner, tip?.id?.toNumber()],
   });
 
-  const { isLoading, isSuccess, write } = useContractWrite({
-    ...conf,
+  const { isLoading, data, write } = useContractWrite(conf);
+
+  useWaitForTransaction({
+    hash: data?.hash,
+    confirmations: 2,
     onSuccess() {
-      setAmount("0");
+      setIsSuccess(true);
+      setAmount("");
       toast.dismiss(toastId);
       toast.success("Thanks for your tip 🎉", { id: toastId, duration: 5000 });
     },
   });
 
   const handleAmount = (e) => {
-    e.target.value !== ""
-      ? setAmount(ethers.utils.parseEther(e.target.value, "ether").toString())
-      : "0";
+    setAmount(e.target.value);
+    refetch?.();
   };
 
   const handleGift = () => {
     toastId = toast.loading("processing..");
-    write();
-    setAmount("");
+    write?.();
   };
-
+  tip && console.log(tip);
   return (
     <Layout>
       <div className="mt-20">
@@ -89,27 +93,36 @@ const GiveTip = () => {
                 {tip && ethers?.utils?.formatEther(tip?.maxAmount)}
               </span>
             </div>
-            <div className="flex flex-col space-y-7 xl:w-[60%]">
-              <input
-                type="text"
-                placeholder="Enter Amount (ETH)"
-                className="w-full p-3 rounded-lg focus:border-green-300 text-gray-900"
-                onChange={(e) => handleAmount(e)}
-              />
+            {tip.isActive ? (
+              <div className="flex flex-col space-y-7 xl:w-[60%]">
+                <input
+                  type="text"
+                  placeholder="Enter Amount (ETH)"
+                  className="w-full p-3 rounded-lg focus:border-green-300 text-gray-900"
+                  onChange={(e) => handleAmount(e)}
+                  value={amount}
+                />
 
-              <button
-                className="px-5 py-3 bg-green-500 text-white rounded-lg shadow-sm w-fit focus-within:outline-none disabled:bg-gray-500"
-                onClick={() => handleGift()}
-                disabled={isLoading}
-              >
-                Give Tip 🪄
-              </button>
-            </div>
+                <button
+                  className="px-5 py-3 bg-green-500 text-white rounded-lg shadow-sm w-fit focus-within:outline-none disabled:bg-gray-500"
+                  onClick={() => handleGift()}
+                  disabled={isLoading}
+                >
+                  Give Tip 🪄
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col space-y-7 xl:w-[60%]">
+                <p className="text-red-500">
+                  Oops! This user is no longer receiving tips
+                </p>
+              </div>
+            )}
           </div>
         ) : (
           <div className="mt-5 bg-gray-700 mt-5= p-5 text-center rounded-lg font-bold">
             <div className=" flex flex-col justify-center items-center">
-              <p className="mb-2">We cant find any Tips.</p>
+              <p className="mb-2">We can't find this Tip.</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -124,19 +137,6 @@ const GiveTip = () => {
                 />
                 <path d="M14.25 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0016.5 7.5h-1.875a.375.375 0 01-.375-.375V5.25z" />
               </svg>
-
-              <div className="flex justify-center items-center mt-4">
-                {isConnected ? (
-                  <Link
-                    className="bg-green-500 p-3 rounded-lg"
-                    href="/dashboard"
-                  >
-                    Dashboard
-                  </Link>
-                ) : (
-                  <ConnectButton />
-                )}
-              </div>
             </div>
           </div>
         )}

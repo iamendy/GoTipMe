@@ -1,6 +1,6 @@
 export const config = {
   //FTM
-  address: "0x74b08Bc52B98720C5ff5B9c321cD8A87924d58C8",
+  address: "0x31D0c920878051D9553825d65D8652566b0Cbcc2",
   abi: [
     {
       anonymous: false,

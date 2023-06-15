@@ -11,7 +11,7 @@ const Navbar = () => {
       className={`bg-black/20 pt-3 pb-3 md:pt-4 md:pb-4 px-3 md:px-5 flex ${
         isConnected ? "justify-between" : "justify-center"
       } items-center
-    xl:pb-9 xl:pt-9`}
+    xl:py-9 xl:px-12`}
     >
       <Link
         href="/"
@@ -22,7 +22,7 @@ const Navbar = () => {
         GoTip<span className="text-green-400">Me</span>
       </Link>
 
-      {isConnected && <ConnectButton />}
+      {isConnected && <ConnectButton showBalance={false} />}
     </div>
   );
 };
