@@ -49,7 +49,7 @@ const ViewPayments = () => {
     abi: config.abi,
     functionName: "withdrawMoney",
     overrides: { from: address },
-    args: [router.query.add, router.query.id],
+    args: [address, router.query.id],
   });
 
   const { write, isLoading } = useContractWrite({

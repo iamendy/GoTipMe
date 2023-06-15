@@ -156,8 +156,8 @@ contract GoTipMe is ReentrancyGuard {
   }
 
   //withdraw funds and deactivate Tip
-  function withdrawMoney(address owner, uint _tipId) external {
-    Tip memory tip = tips[owner][_tipId];
+  function withdrawMoney(address _owner, uint _tipId) external {
+    Tip memory tip = tips[_owner][_tipId];
 
     //checks if tip is active
     require(tip.isActive == true, "Tips is already withdrawn");
@@ -171,12 +171,14 @@ contract GoTipMe is ReentrancyGuard {
 
     //deactivate Tip
     allUserTips[tip.owner][_tipId - 1].isActive = false;
+    tips[_owner][_tipId].isActive = false;
   }
 }
 
 //const x = await GoTipMe.deployed()
 //await x.createNewTip("title","description","3000000000000000000")
-//await x.giveTip("0xCa1604B345ac7001e7F442676d02F0E22797118a", 1, {from: '0x9081e967D39587aaE9F218a8ea6E8671555d4161', value: '1000000000000000000'})
-//await x.giveTip("0xCa1604B345ac7001e7F442676d02F0E22797118a", 1, {from: '0x9081e967D39587aaE9F218a8ea6E8671555d4161', value: '2000000000000000000'})
+//await x.giveTip(1, {from: '0x9081e967D39587aaE9F218a8ea6E8671555d4161', value: '1000000000000000000'})
+//await x.giveTip(1, {from: '0x9081e967D39587aaE9F218a8ea6E8671555d4161', value: '2000000000000000000'})
 //await x.withdrawMoney(1)
-//await x.allUserTips('0xD7451cCE6e241a38eA38079Ab1Ae3A3EBB6B366a',1)
+//await x.allUserTips('0xD7451cCE6e241a38eA38079Ab1Ae3A3EBB6B366a',0)
+//0x1e354cbFb451A6dD73902B504f05c5C66b43A3Eb

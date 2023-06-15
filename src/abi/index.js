@@ -1,7 +1,48 @@
 export const config = {
   //FTM
-  address: "0x31D0c920878051D9553825d65D8652566b0Cbcc2",
+  address: "0x8835903218C0ce65F9908558Ee6448c83f484016",
   abi: [
+    {
+      inputs: [
+        {
+          internalType: "string",
+          name: "_title",
+          type: "string",
+        },
+        {
+          internalType: "string",
+          name: "_description",
+          type: "string",
+        },
+        {
+          internalType: "uint256",
+          name: "_maxAmount",
+          type: "uint256",
+        },
+      ],
+      name: "createNewTip",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "address",
+          name: "_owner",
+          type: "address",
+        },
+        {
+          internalType: "uint256",
+          name: "_tipId",
+          type: "uint256",
+        },
+      ],
+      name: "giveTip",
+      outputs: [],
+      stateMutability: "payable",
+      type: "function",
+    },
     {
       anonymous: false,
       inputs: [
@@ -85,22 +126,17 @@ export const config = {
     {
       inputs: [
         {
-          internalType: "string",
-          name: "_title",
-          type: "string",
-        },
-        {
-          internalType: "string",
-          name: "_description",
-          type: "string",
+          internalType: "address",
+          name: "_owner",
+          type: "address",
         },
         {
           internalType: "uint256",
-          name: "_maxAmount",
+          name: "_tipId",
           type: "uint256",
         },
       ],
-      name: "createNewTip",
+      name: "withdrawMoney",
       outputs: [],
       stateMutability: "nonpayable",
       type: "function",
@@ -290,42 +326,6 @@ export const config = {
         },
       ],
       stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "address",
-          name: "_owner",
-          type: "address",
-        },
-        {
-          internalType: "uint256",
-          name: "_tipId",
-          type: "uint256",
-        },
-      ],
-      name: "giveTip",
-      outputs: [],
-      stateMutability: "payable",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "address",
-          name: "owner",
-          type: "address",
-        },
-        {
-          internalType: "uint256",
-          name: "_tipId",
-          type: "uint256",
-        },
-      ],
-      name: "withdrawMoney",
-      outputs: [],
-      stateMutability: "nonpayable",
       type: "function",
     },
   ],
