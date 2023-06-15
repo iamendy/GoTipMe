@@ -32,7 +32,7 @@ const Tip = ({ tip }) => {
     >
       <div className="flex items-center justify-between">
         <div className="mb-4">
-          <h4 className="text-green-500">Title{parseInt(tip?.id)}</h4>
+          <h4 className="text-green-500">Title</h4>
           <p className="">{tip?.title}</p>
         </div>
 

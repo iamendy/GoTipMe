@@ -97,7 +97,7 @@ const AddNewTip = () => {
 
             <input
               type="text"
-              placeholder="Enter amount (ETH)"
+              placeholder="Enter amount (FTM)"
               className="w-full p-3 rounded-lg focus:outline-green-300 text-gray-900"
               onChange={(e) => handleAmount(e)}
             />
