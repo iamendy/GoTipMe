@@ -42,7 +42,7 @@ const Tip = ({ tip }) => {
       <p>{tip?.description}</p>
 
       <div className="flex justify-between">
-        <Link href={`${tip?.isActive ? `/tip/${tip.id}` : ``}`} target="_blank">
+        <Link href={`/give-tip?add=${address}&tipId=${tip.id}`} target="_blank">
           <div className="flex items-center bg-gray-900 rounded-lg w-fit mt-2 p-3">
             Visit link
             <svg
@@ -62,7 +62,7 @@ const Tip = ({ tip }) => {
           </div>
         </Link>
 
-        <Link href={`/tip/${tip?.id}/donors`}>
+        <Link href={`/give-tip?id=${tip?.id}/donors`}>
           <div className="flex items-center bg-green-600 rounded-lg w-fit mt-2 p-3">
             See Donors
           </div>
