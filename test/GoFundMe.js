@@ -34,8 +34,6 @@ contract("GoTipMe", (accounts) => {
         from: owner,
       });
 
-      console.log(userTips);
-
       // Check if the tip was created successfully
       expect(userTips.length).to.equal(1);
       expect(userTips[0].title).to.equal(title);

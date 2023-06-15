@@ -122,7 +122,7 @@ const GiveTip = () => {
         ) : (
           <div className="mt-5 bg-gray-700 mt-5= p-5 text-center rounded-lg font-bold">
             <div className=" flex flex-col justify-center items-center">
-              <p className="mb-2">We can't find this Tip.</p>
+              <p className="mb-2">Opps! We cannot find this Tip.</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
