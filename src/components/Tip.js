@@ -32,7 +32,7 @@ const Tip = ({ tip }) => {
     >
       <div className="flex items-center justify-between">
         <div className="mb-4">
-          <h4 className="text-green-500">Title</h4>
+          <h4 className="text-green-500">Title{parseInt(tip?.id)}</h4>
           <p className="">{tip?.title}</p>
         </div>
 
@@ -53,7 +53,10 @@ const Tip = ({ tip }) => {
       </div>
 
       <div className="flex justify-between">
-        <Link href={`/give-tip?add=${address}&tipId=${tip.id}`} target="_blank">
+        <Link
+          href={`/give-tip?add=${address}&tipId=${tip?.id}`}
+          target="_blank"
+        >
           <div className="flex items-center bg-gray-900 rounded-lg w-fit mt-2 p-3">
             Visit link
             <svg
@@ -73,7 +76,11 @@ const Tip = ({ tip }) => {
           </div>
         </Link>
 
-        <Link href={`/dashboard/view-payments?add=${address}&id=${tip?.id}`}>
+        <Link
+          href={`/dashboard/view-payments?add=${address}&id=${parseInt(
+            tip?.id
+          )}`}
+        >
           <div className="flex items-center bg-green-600 rounded-lg w-fit mt-2 p-3">
             View Payments
           </div>

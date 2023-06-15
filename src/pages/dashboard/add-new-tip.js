@@ -1,6 +1,10 @@
 import Layout from "../../components/Layout";
 import { useAccount } from "wagmi";
-import { useContractWrite, usePrepareContractWrite } from "wagmi";
+import {
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
 import Link from "next/link";
 import config from "../../abi";
 import { useState } from "react";
@@ -24,8 +28,11 @@ const AddNewTip = () => {
     args: [title, description, amount],
   });
 
-  const { write, isLoading } = useContractWrite({
-    ...writeConfig,
+  const { write, isLoading, data } = useContractWrite(writeConfig);
+
+  useWaitForTransaction({
+    hash: data?.hash,
+    confirmations: 2,
     onSuccess() {
       toast.dismiss(toastId);
       toast.success("Tip Created 🎉", { id: toastId, duration: 5000 });

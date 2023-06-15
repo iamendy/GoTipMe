@@ -43,7 +43,7 @@ const Dashboard = () => {
           tips
             .slice(0)
             .reverse()
-            .map((tip) => <Tip key={tip.name} tip={tip} />)
+            .map((tip, i) => <Tip key={i} tip={tip} />)
         ) : (
           <div className="mt-5 bg-gray-700 mt-5= p-5 text-center rounded-lg font-bold">
             <div className=" flex flex-col justify-center items-center">

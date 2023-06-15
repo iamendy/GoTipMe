@@ -1,6 +1,6 @@
 export const config = {
-  //FTM
-  address: "0x8835903218C0ce65F9908558Ee6448c83f484016",
+  //Fantom
+  address: "0xC81A2e8973EAD2Fab665C4386bA75508a5e9BD66",
   abi: [
     {
       inputs: [
@@ -125,11 +125,6 @@ export const config = {
     },
     {
       inputs: [
-        {
-          internalType: "address",
-          name: "_owner",
-          type: "address",
-        },
         {
           internalType: "uint256",
           name: "_tipId",

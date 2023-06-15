@@ -97,7 +97,7 @@ const GiveTip = () => {
               <div className="flex flex-col space-y-7 xl:w-[60%]">
                 <input
                   type="text"
-                  placeholder="Enter Amount (ETH)"
+                  placeholder="Enter Amount (FTM)"
                   className="w-full p-3 rounded-lg focus:border-green-300 text-gray-900"
                   onChange={(e) => handleAmount(e)}
                   value={amount}

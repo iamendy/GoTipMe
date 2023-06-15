@@ -4,6 +4,7 @@ import {
   useContractRead,
   usePrepareContractWrite,
   useContractWrite,
+  useWaitForTransaction,
 } from "wagmi";
 import config from "../../abi";
 import { useRouter } from "next/router";
@@ -16,14 +17,17 @@ const ViewPayments = () => {
   const { address } = useAccount();
   let toastId;
 
-  const { data: payments, isLoading: isLoadingPayment } = useContractRead({
+  //get payments list
+  const { data: payments } = useContractRead({
     address: config.address,
     abi: config.abi,
+    watch: true,
     functionName: "getTipPayments",
     overrides: { from: address },
     args: [router?.query?.add, router?.query?.id],
   });
 
+  //get total amount raised on a tip
   const { data: tipTotal } = useContractRead({
     address: config.address,
     abi: config.abi,
@@ -34,6 +38,7 @@ const ViewPayments = () => {
     },
   });
 
+  //retrieve tip
   const { data: tip } = useContractRead({
     address: config.address,
     abi: config.abi,
@@ -44,16 +49,19 @@ const ViewPayments = () => {
     },
   });
 
+  //withdraw from tip
   const { config: writeConfig } = usePrepareContractWrite({
     address: config.address,
     abi: config.abi,
     functionName: "withdrawMoney",
     overrides: { from: address },
-    args: [address, router.query.id],
+    args: [router?.query?.id],
   });
 
-  const { write, isLoading } = useContractWrite({
-    ...writeConfig,
+  const { write, isLoading, data } = useContractWrite(writeConfig);
+
+  useWaitForTransaction({
+    hash: data?.hash,
     onSuccess() {
       toast.dismiss(toastId);
       toast.success("Withdrawal Successful 🎉", {
@@ -69,11 +77,9 @@ const ViewPayments = () => {
 
   const handleWithdraw = () => {
     confirm("Are you sure?");
-    write();
+    write?.();
     toastId = toast.loading("processing..");
   };
-
-  tip && console.log(tip);
 
   return (
     <Layout>
@@ -129,10 +135,7 @@ const ViewPayments = () => {
 
         {payments && payments.length > 0 ? (
           payments.map((payment, i) => (
-            <div
-              key={payment?.owner}
-              className="bg-gray-700 p-5 rounded-lg mt-5"
-            >
+            <div key={i} className="bg-gray-700 p-5 rounded-lg mt-5">
               <div className="flex justify-between items-center">
                 <span>{i + 1}</span>
                 <span className="font-bold">
